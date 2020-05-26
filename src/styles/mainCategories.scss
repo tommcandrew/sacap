@@ -1,0 +1,17 @@
+.mainCategories__wrapper {
+  margin: 2rem 0;
+}
+
+.mainCategories__content {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid #ccc;
+  height: 100%;
+  padding: 3rem 0;
+}
+
+@media only screen and (max-width: 950px) {
+  .mainCategories__wrapper {
+    margin: 0;
+  }
+}

@@ -1,0 +1,37 @@
+.product__wrapper {
+  margin: 2rem 0;
+}
+
+.product__content {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid #ccc;
+  height: 100%;
+  padding: 3rem 0;
+}
+
+.product__form {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.product__right {
+  flex-basis: 45%;
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 950px) {
+  .product__content {
+    flex-direction: column;
+  }
+  .product__form {
+    margin: 0 auto;
+  }
+  .product__name {
+    text-align: center;
+  }
+  .product__id {
+    text-align: center;
+  }
+}

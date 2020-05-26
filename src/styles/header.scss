@@ -1,0 +1,12 @@
+.header__nav--mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 650px) {
+  .header__nav--mobile {
+    display: block;
+  }
+  .header__nav--normal {
+    display: none;
+  }
+}

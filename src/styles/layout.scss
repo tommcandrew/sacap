@@ -1,0 +1,34 @@
+.layout__wrapper {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.layout__content {
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  min-height: 100vh;
+  // margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.layout__left {
+  flex-basis: 22%;
+}
+
+.layout__right {
+  flex-basis: 75%;
+}
+
+@media only screen and (max-width: 950px) {
+  .layout__content {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    // margin-top: 1rem;
+  }
+}

@@ -1,0 +1,42 @@
+.cart__bin:hover {
+  fill: #f44336;
+}
+
+.cart__wrapper {
+  text-align: center;
+  flex-basis: 22%;
+  padding: 0.5rem;
+  margin-top: 0rem;
+}
+
+.cart__wrapper--mobile {
+  background: #88a09e;
+  padding: 1.2rem 1.5rem 0.5rem 0;
+  text-align: right;
+}
+
+.cart__content--mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  outline: 2px solid red;
+  height: 100%;
+  padding: 1rem;
+}
+
+.cart__wrapper--normal {
+  display: none;
+}
+
+//desktop
+@media only screen and (min-width: 1000px) {
+  .cart__wrapper {
+    margin-top: 4rem;
+  }
+  .cart__wrapper--normal {
+    display: block;
+  }
+  .cart__wrapper--mobile {
+    display: none;
+  }
+}
