@@ -8,6 +8,8 @@ import { Button } from "@material-ui/core"
 import "../styles/orderForm.scss"
 import Container from "@material-ui/core/Container"
 import Typography from "@material-ui/core/Typography"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 const handleItemsInputChange = e => {
   //I think this is an event handler is necessary as 'value' is set on the input element
@@ -33,30 +35,9 @@ const useStyles = makeStyles(theme => ({
 const OrderForm = props => {
   const { cartItems, clearCart } = useContext(CartContext)
   const [cartItemsString, setCartItemsString] = useState("")
-  const classes = useStyles()
+  const { language } = useContext(LanguageContext)
 
-  const formLabels = {
-    name: {
-      es: "Nombre",
-      en: "Name",
-    },
-    company: {
-      es: "Empresa",
-      en: "Company",
-    },
-    email: {
-      es: "Email",
-      en: "Email",
-    },
-    phone: {
-      es: "Teléfono",
-      en: "Phone",
-    },
-    note: {
-      es: "Nota",
-      en: "Note",
-    },
-  }
+  const classes = useStyles()
 
   //cartItems is an array of objects so I think I need to convert it to a string before sending
   useEffect(() => {
@@ -79,27 +60,16 @@ const OrderForm = props => {
   return (
     <Layout hideQuoteButton={"hide"} page="orderform">
       <Container>
-        {props.pageContext.locale === "es" ? (
-          <Typography
-            variant="h5"
-            color="inherit"
-            noWrap
-            className={classes.title}
-            align="center"
-          >
-            Sus Detalles
-          </Typography>
-        ) : (
-          <Typography
-            variant="h5"
-            color="inherit"
-            noWrap
-            className={classes.title}
-            align="center"
-          >
-            Your Details
-          </Typography>
-        )}
+        <Typography
+          variant="h5"
+          color="inherit"
+          noWrap
+          className={classes.title}
+          align="center"
+        >
+          {multiLingualText.your_details[language]}
+        </Typography>
+
         <form
           className="orderForm__form"
           action="/success"
@@ -110,7 +80,7 @@ const OrderForm = props => {
 
           <div className="orderForm__field">
             <TextField
-              label={formLabels["name"][props.pageContext.locale]}
+              label={multiLingualText.name[language]}
               id="name"
               name="name"
               required
@@ -119,7 +89,7 @@ const OrderForm = props => {
           </div>
           <div className="orderForm__field">
             <TextField
-              label={formLabels["company"][props.pageContext.locale]}
+              label={multiLingualText.company[language]}
               id="company"
               name="company"
               required
@@ -129,7 +99,7 @@ const OrderForm = props => {
 
           <div className="orderForm__field">
             <TextField
-              label={formLabels["email"][props.pageContext.locale]}
+              label={multiLingualText.email[language]}
               id="email"
               name="email"
               required
@@ -140,7 +110,7 @@ const OrderForm = props => {
 
           <div className="orderForm__field">
             <TextField
-              label={formLabels["phone"][props.pageContext.locale]}
+              label={multiLingualText.phone[language]}
               id="phone"
               name="phone"
               required
@@ -150,7 +120,7 @@ const OrderForm = props => {
 
           <div className="orderForm__field">
             <TextField
-              label={formLabels["note"][props.pageContext.locale]}
+              label={multiLingualText.note[language]}
               id="note"
               name="note"
               fullWidth
@@ -175,7 +145,7 @@ const OrderForm = props => {
               variant="contained"
               color="secondary"
             >
-              {props.pageContext.locale === "es" ? "Enviar" : "Send"}
+              {multiLingualText.send[language]}
             </Button>
           </div>
         </form>

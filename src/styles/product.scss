@@ -21,10 +21,7 @@
   padding: 1rem;
 }
 
-@media only screen and (max-width: 950px) {
-  .product__content {
-    flex-direction: column;
-  }
+@media only screen and (max-width: 650px) {
   .product__form {
     margin: 0 auto;
   }
@@ -33,5 +30,11 @@
   }
   .product__id {
     text-align: center;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .product__content {
+    flex-direction: column;
   }
 }

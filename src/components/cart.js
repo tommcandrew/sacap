@@ -16,6 +16,8 @@ import Typography from "@material-ui/core/Typography"
 import Badge from "@material-ui/core/Badge"
 import ClearIcon from "@material-ui/icons/Clear"
 import Container from "@material-ui/core/Container"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 const useStyles = makeStyles(theme => ({
   demo: {
@@ -48,6 +50,8 @@ const Cart = ({ hideQuoteButton, page }) => {
   const [open, setOpen] = useState(false)
   const [showNormalCart, setShowNormalCart] = useState(true)
 
+  const { language, changeLanguage } = useContext(LanguageContext)
+
   const toggleDrawer = () => {
     setOpen(!open)
   }
@@ -63,7 +67,7 @@ const Cart = ({ hideQuoteButton, page }) => {
               noWrap
               className={classes.title}
             >
-              Your Order
+              {multiLingualText.your_order[language]}
             </Typography>
           )}
           {cartItems.map((item, index) => (
@@ -77,7 +81,7 @@ const Cart = ({ hideQuoteButton, page }) => {
                   edge="end"
                   aria-label="delete"
                   onClick={() => handleRemoveFromCart(item.id)}
-                  title="Remove item"
+                  title={multiLingualText.remove_item[language]}
                 >
                   <ClearIcon className="cart__bin" />
                 </IconButton>
@@ -85,7 +89,10 @@ const Cart = ({ hideQuoteButton, page }) => {
             </ListItem>
           ))}
           {cartItems.length === 0 && (
-            <Typography>Your cart is empty.</Typography>
+            <Typography>
+              {" "}
+              {multiLingualText.your_cart_is_empty[language]}
+            </Typography>
           )}
         </List>
         {!hideQuoteButton && (
@@ -95,12 +102,18 @@ const Cart = ({ hideQuoteButton, page }) => {
             href="/orderform"
             fullWidth
           >
-            Get Quote
+            {multiLingualText.get_quote[language]}
           </Button>
         )}
       </Paper>
 
       <div className={`cart__wrapper cart__wrapper--mobile`}>
+        <Button
+          onClick={() => changeLanguage(language === "en" ? "es" : "en")}
+          className="header__lang"
+        >
+          {language === "en" ? "ES" : "EN"}
+        </Button>
         <Badge badgeContent={cartItems.length} color="secondary">
           <ShoppingCartOutlinedIcon
             fontSize="large"
@@ -129,7 +142,7 @@ const Cart = ({ hideQuoteButton, page }) => {
                       edge="end"
                       aria-label="delete"
                       onClick={() => handleRemoveFromCart(item.id)}
-                      title="Remove item"
+                      title={multiLingualText.remove_item[language]}
                     >
                       <ClearIcon className="cart__bin" />
                     </IconButton>
@@ -138,7 +151,10 @@ const Cart = ({ hideQuoteButton, page }) => {
               ))}
               <Container>
                 {cartItems.length === 0 && (
-                  <Typography align="center">Your cart is empty.</Typography>
+                  <Typography align="center">
+                    {" "}
+                    {multiLingualText.your_cart_is_empty[language]}
+                  </Typography>
                 )}
               </Container>
             </List>
@@ -150,7 +166,7 @@ const Cart = ({ hideQuoteButton, page }) => {
                 fullWidth
                 size="large"
               >
-                Get Quote
+                {multiLingualText.get_quote[language]}
               </Button>
             )}
           </div>

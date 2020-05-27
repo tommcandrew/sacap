@@ -4,25 +4,23 @@ import Container from "@material-ui/core/Container"
 import CartContext from "../context/CartContext"
 import Typography from "@material-ui/core/Typography"
 import "../styles/success.scss"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 const Success = props => {
   const { clearCart } = useContext(CartContext)
+  const { language } = useContext(LanguageContext)
 
   useEffect(() => {
     clearCart()
   }, [])
+
   return (
     <Layout>
       <Container className="success__wrapper">
-        {props.pageContext.locale === "es" ? (
-          <Typography align="center" variant="h5">
-            Gracias por su orden. nos pondremos en contacto en breve.
-          </Typography>
-        ) : (
-          <Typography align="center" variant="h5">
-            Thank you for your order. We will be in touch shortly.
-          </Typography>
-        )}
+        <Typography align="center" variant="h5">
+          {multiLingualText.success_message[language]}
+        </Typography>
       </Container>
     </Layout>
   )

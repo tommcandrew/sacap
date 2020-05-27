@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Layout from "../components/layout"
 import getCategoryImages from "../utils/getCategoryImages"
@@ -10,6 +10,8 @@ import Container from "@material-ui/core/Container"
 import Thumb from "../components/thumb"
 import "../styles/products.scss"
 import "../styles/global.scss"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -20,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 const Products = props => {
   const classes = useStyles()
+  const { language } = useContext(LanguageContext)
 
   const data = useStaticQuery(graphql`
     query {
@@ -53,25 +56,14 @@ const Products = props => {
   return (
     <Layout>
       <Container className="products__wrapper">
-        {props.pageContext.locale === "es" ? (
-          <Typography
-            gutterBottom
-            variant="h4"
-            component="h4"
-            className={classes.title}
-          >
-            Nuestros Productos
-          </Typography>
-        ) : (
-          <Typography
-            gutterBottom
-            variant="h4"
-            component="h4"
-            className={classes.title}
-          >
-            Our Products
-          </Typography>
-        )}
+        <Typography
+          gutterBottom
+          variant="h4"
+          component="h4"
+          className={classes.title}
+        >
+          {multiLingualText.our_products[language]}
+        </Typography>
         <div className="products__content">
           <Container maxWidth="md">
             <Grid container spacing={4}>

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 const CartContext = React.createContext()
 
 const CartProvider = props => {
   const [cartItems, setCartItems] = useState([])
   const [infoMessages, setInfoMessages] = useState([])
+  const { language } = useContext(LanguageContext)
 
   useEffect(() => {
     const alertTimer = setTimeout(() => {
@@ -30,7 +33,7 @@ const CartProvider = props => {
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].id === id) {
         setInfoMessages([
-          { type: "warning", text: "This item is already in your cart." },
+          { type: "warning", text: multiLingualText.already_in_cart[language] },
         ])
         return
       }
@@ -38,7 +41,9 @@ const CartProvider = props => {
     const cartObj = { name, id, quantity }
     setCartItems([...cartItems, cartObj])
     saveToLocalStorage(cartObj)
-    setInfoMessages([{ type: "success", text: "Added to cart." }])
+    setInfoMessages([
+      { type: "success", text: multiLingualText.added[language] },
+    ])
   }
 
   const saveToLocalStorage = productObj => {
@@ -52,7 +57,9 @@ const CartProvider = props => {
     const updatedArray = cartItems.filter(item => item.id !== id)
     setCartItems([...updatedArray])
     localStorage.setItem("cartItems", JSON.stringify([...updatedArray]))
-    setInfoMessages([{ type: "success", text: "Item removed." }])
+    setInfoMessages([
+      { type: "success", text: multiLingualText.removed[language] },
+    ])
   }
 
   const clearCart = () => {

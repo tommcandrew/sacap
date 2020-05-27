@@ -1,27 +1,27 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCheckCircle,
   faTimesCircle,
   faExclamationCircle,
   faLightbulb,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons"
 
-import "../styles/alert.scss";
+import "../styles/alert.scss"
 
-const getIcon = (message) => {
-  let icon;
+const getIcon = message => {
+  let icon
   if (message.type === "success") {
-    icon = faCheckCircle;
+    icon = faCheckCircle
   } else if (message.type === "failure") {
-    icon = faTimesCircle;
+    icon = faTimesCircle
   } else if (message.type === "info") {
-    icon = faLightbulb;
+    icon = faLightbulb
   } else {
-    icon = faExclamationCircle;
+    icon = faExclamationCircle
   }
-  return icon;
-};
+  return icon
+}
 
 const Alert = ({ messages }) => {
   return (
@@ -38,7 +38,7 @@ const Alert = ({ messages }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Alert;
+export default Alert

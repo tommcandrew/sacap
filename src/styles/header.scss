@@ -2,6 +2,11 @@
   display: none;
 }
 
+.header__nav--normal {
+  display: flex;
+}
+
+//mobile
 @media only screen and (max-width: 650px) {
   .header__nav--mobile {
     display: block;

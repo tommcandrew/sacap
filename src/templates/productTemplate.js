@@ -12,6 +12,8 @@ import capitaliseFirst from "../utils/capitaliseFirst"
 import "../styles/product.scss"
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 export const query = graphql`
   query($id: String!) {
@@ -50,6 +52,7 @@ const useStyles = makeStyles(theme => ({
 const ProductTemplate = props => {
   const { handleAddToCart } = useContext(CartContext)
   const classes = useStyles()
+  const { language } = useContext(LanguageContext)
 
   const handleAddRequest = e => {
     e.preventDefault()
@@ -63,15 +66,9 @@ const ProductTemplate = props => {
     <Layout>
       <Container className="product__wrapper">
         <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
-          {props.pageContext.locale === "es" ? (
-            <Link color="inherit" href="/">
-              Productos
-            </Link>
-          ) : (
-            <Link color="inherit" href="/">
-              Products
-            </Link>
-          )}
+          <Link color="inherit" href="/">
+            {multiLingualText.products[language]}
+          </Link>
           <Link
             color="inherit"
             href={`/products/${props.data.contentfulProduct.mainCategory}`}
@@ -118,12 +115,12 @@ const ProductTemplate = props => {
             )}
             <form className="product__form" onSubmit={e => handleAddRequest(e)}>
               <TextField
-                label="QTY"
+                label={multiLingualText.qty[language]}
                 name="quantity"
                 className={classes.input}
               />
               <Button variant="contained" color="secondary" type="submit">
-                {props.pageContext.locale === "es" ? "Añadir" : "Add"}
+                {multiLingualText.add[language]}
               </Button>
             </form>
           </div>

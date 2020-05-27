@@ -12,7 +12,8 @@
 .cart__wrapper--mobile {
   background: #88a09e;
   padding: 1.2rem 1.5rem 0.5rem 0;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
 }
 
 .cart__content--mobile {
@@ -28,8 +29,8 @@
   display: none;
 }
 
-//desktop
-@media only screen and (min-width: 1000px) {
+//tablet/desktop
+@media only screen and (min-width: 650px) {
   .cart__wrapper {
     margin-top: 4rem;
   }

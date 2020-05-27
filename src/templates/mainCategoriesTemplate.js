@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import Layout from "../components/layout"
 import getCategoryImages from "../utils/getCategoryImages"
 import removeDuplicates from "../utils/removeDuplicates"
@@ -12,6 +12,8 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs"
 import Typography from "@material-ui/core/Typography"
 import capitaliseFirst from "../utils/capitaliseFirst"
 import "../styles/mainCategories.scss"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 export const query = graphql`
   query($mainCategory: String!) {
@@ -37,8 +39,7 @@ const useStyles = makeStyles(theme => ({}))
 
 const MainCategoriesTemplate = props => {
   const classes = useStyles()
-
-  console.log(props)
+  const { language } = useContext(LanguageContext)
 
   //get unique list of sub categories
   const subCategoriesAll = props.data.allContentfulProduct.edges.map(
@@ -56,15 +57,9 @@ const MainCategoriesTemplate = props => {
     <Layout>
       <Container className="mainCategories__wrapper">
         <Breadcrumbs aria-label="breadcrumb">
-          {props.pageContext.locale === "es" ? (
-            <Link color="inherit" href="/">
-              Productos
-            </Link>
-          ) : (
-            <Link color="inherit" href="/">
-              Products
-            </Link>
-          )}
+          <Link color="inherit" href="/">
+            {multiLingualText.products[language]}
+          </Link>
 
           <Typography color="textPrimary">
             {capitaliseFirst(props.pageContext.mainCategory)}

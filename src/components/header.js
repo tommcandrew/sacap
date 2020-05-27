@@ -1,5 +1,5 @@
 import Link from "@material-ui/core/Link"
-import React from "react"
+import React, { useContext } from "react"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import { makeStyles } from "@material-ui/core/styles"
@@ -11,6 +11,9 @@ import IconButton from "@material-ui/core/IconButton"
 import MenuIcon from "@material-ui/icons/Menu"
 import capitaliseFirst from "../utils/capitaliseFirst"
 import "../styles/header.scss"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
+import { Button } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   bar: {
@@ -57,6 +60,8 @@ const Header = () => {
     setOpen(!open)
   }
 
+  const { language, changeLanguage } = useContext(LanguageContext)
+
   return (
     <div>
       <AppBar position="relative">
@@ -78,7 +83,7 @@ const Header = () => {
                     className={classes.link}
                     style={{ textDecoration: "none" }}
                   >
-                    Products
+                    {multiLingualText.products[language]}
                   </Link>
                 </ListItemText>
 
@@ -88,7 +93,7 @@ const Header = () => {
                     className={classes.link}
                     style={{ textDecoration: "none" }}
                   >
-                    Services
+                    {multiLingualText.services[language]}
                   </Link>
                 </ListItemText>
 
@@ -98,11 +103,17 @@ const Header = () => {
                     className={classes.link}
                     style={{ textDecoration: "none" }}
                   >
-                    Contact
+                    {multiLingualText.contact[language]}
                   </Link>
                 </ListItemText>
               </ListItem>
             </List>
+            <Button
+              onClick={() => changeLanguage(language === "en" ? "es" : "en")}
+              className="header__lang"
+            >
+              {language === "en" ? "ES" : "EN"}
+            </Button>
           </div>
 
           <div className="header__nav--mobile">
