@@ -1,15 +1,19 @@
-import React from "react"
+import React, { useContext } from "react"
 import Layout from "../components/layout"
 import Container from "@material-ui/core/Container"
 import Typography from "@material-ui/core/Typography"
 import "../styles/contact.scss"
+import LanguageContext from "../context/LanguageContext"
+import multiLingualText from "../assets/multiLingualText"
 
 const Contact = () => {
+  const { language } = useContext(LanguageContext)
+
   return (
     <Layout>
       <Container className="services__wrapper">
         <Typography gutterBottom variant="h4" component="h4" align="center">
-          Contact Us
+          {multiLingualText.contact_us[language]}
         </Typography>
         <Container>
           <Typography variant="body1" paragraph={true}>

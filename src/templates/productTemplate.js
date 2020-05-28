@@ -25,6 +25,9 @@ export const query = graphql`
       description {
         json
       }
+      descriptionSpanish {
+        json
+      }
       image {
         title
         fluid {
@@ -62,6 +65,24 @@ const ProductTemplate = props => {
     handleAddToCart(name, id, quantity)
     e.target.reset()
   }
+  let mainCategory
+  if (language === "en" || !props.data.contentfulProduct.mainCategorySpanish) {
+    mainCategory = props.data.contentfulProduct.mainCategory
+  } else {
+    mainCategory = props.data.contentfulProduct.mainCategorySpanish
+  }
+  let subCategory
+  if (language === "en" || !props.data.contentfulProduct.subCategorySpanish) {
+    subCategory = props.data.contentfulProduct.subCategory
+  } else {
+    subCategory = props.data.contentfulProduct.subCategorySpanish
+  }
+  let description
+  if (language === "en" || !props.data.contentfulProduct.descriptionSpanish) {
+    description = props.data.contentfulProduct.description.json
+  } else {
+    description = props.data.contentfulProduct.descriptionSpanish.json
+  }
   return (
     <Layout>
       <Container className="product__wrapper">
@@ -73,13 +94,13 @@ const ProductTemplate = props => {
             color="inherit"
             href={`/products/${props.data.contentfulProduct.mainCategory}`}
           >
-            {capitaliseFirst(props.data.contentfulProduct.mainCategory)}
+            {mainCategory}
           </Link>
           <Link
             color="inherit"
             href={`/products/${props.data.contentfulProduct.mainCategory}/${props.data.contentfulProduct.subCategory}`}
           >
-            {capitaliseFirst(props.data.contentfulProduct.subCategory)}
+            {subCategory}
           </Link>
           <Typography color="textPrimary">
             {capitaliseFirst(props.data.contentfulProduct.name)}
@@ -110,9 +131,7 @@ const ProductTemplate = props => {
             >
               ID: {capitaliseFirst(props.data.contentfulProduct.contentful_id)}
             </Typography>
-            {documentToReactComponents(
-              props.data.contentfulProduct.description.json
-            )}
+            {documentToReactComponents(description)}
             <form className="product__form" onSubmit={e => handleAddRequest(e)}>
               <TextField
                 label={multiLingualText.qty[language]}

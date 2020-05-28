@@ -23,29 +23,50 @@ const Footer = () => {
         edges {
           node {
             mainCategory
+            mainCategorySpanish
           }
         }
       }
     }
   `)
-  const mainCategoriesAll = data.allContentfulProduct.edges.map(
+
+  const mainCategoriesAllEnglish = data.allContentfulProduct.edges.map(
     edge => edge.node.mainCategory
   )
   //remove duplicates from list
-  const mainCategoriesUnique = removeDuplicates(mainCategoriesAll)
+  const mainCategoriesUniqueEnglish = removeDuplicates(mainCategoriesAllEnglish)
 
+  const mainCategoriesAllLocalised = data.allContentfulProduct.edges.map(
+    edge => {
+      if (language === "en" || !edge.node.mainCategorySpanish) {
+        return edge.node.mainCategory
+      } else {
+        return edge.node.mainCategorySpanish
+      }
+    }
+  )
+
+  const mainCategoriesLocalisedUnique = removeDuplicates(
+    mainCategoriesAllLocalised
+  )
   return (
     <div className="footer__wrapper">
       <div className="footer__content">
         <div className="footer__lists">
           <ul className="footer__list">
             <Typography variant="h5" gutterBottom>
-              {multiLingualText.products[language]}
+              <Link
+                href={"/"}
+                className={classes.link}
+                style={{ textDecoration: "none" }}
+              >
+                {multiLingualText.products[language]}
+              </Link>
             </Typography>
-            {mainCategoriesUnique.map((mainCategory, index) => (
+            {mainCategoriesLocalisedUnique.map((mainCategory, index) => (
               <li key={index}>
                 <Link
-                  href={`/${mainCategory}`}
+                  href={`/products/${mainCategoriesUniqueEnglish[index]}`}
                   className={classes.link}
                   style={{ textDecoration: "none" }}
                 >
@@ -57,10 +78,23 @@ const Footer = () => {
 
           <ul className="footer__list">
             <Typography variant="h5" gutterBottom>
-              {multiLingualText.services[language]}
+              <Link
+                href={"/services"}
+                className={classes.link}
+                style={{ textDecoration: "none" }}
+              >
+                {multiLingualText.services[language]}
+              </Link>
             </Typography>
-            <li>Package Design</li>
-            <li>Custom Moulding</li>
+            <li>
+              <Link
+                href={"/services/#customDesign"}
+                className={classes.link}
+                style={{ textDecoration: "none" }}
+              >
+                {multiLingualText.custom_design[language]}{" "}
+              </Link>
+            </li>
           </ul>
 
           <ul className="footer__list">
@@ -68,10 +102,13 @@ const Footer = () => {
               {multiLingualText.our_company[language]}
             </Typography>
             <li> {multiLingualText.about[language]}</li>
-            <li>
-              {" "}
+            <Link
+              href={"/contact"}
+              className={classes.link}
+              style={{ textDecoration: "none" }}
+            >
               <li> {multiLingualText.contact[language]}</li>
-            </li>
+            </Link>
           </ul>
         </div>
         <div className="footer__copyright">

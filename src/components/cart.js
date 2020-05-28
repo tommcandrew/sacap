@@ -74,7 +74,7 @@ const Cart = ({ hideQuoteButton, page }) => {
             <ListItem className={classes.item} key={index}>
               <ListItemText
                 primary={item.name}
-                secondary={`${item.quantity} pieces`}
+                secondary={`${item.quantity} ${multiLingualText.pieces[language]}`}
               />
               <ListItemSecondaryAction>
                 <IconButton

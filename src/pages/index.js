@@ -30,6 +30,7 @@ const Products = props => {
         edges {
           node {
             mainCategory
+            mainCategorySpanish
             image {
               title
               fluid {
@@ -41,16 +42,29 @@ const Products = props => {
       }
     }
   `)
-  const mainCategoriesAll = data.allContentfulProduct.edges.map(
+  const mainCategoriesAllEnglish = data.allContentfulProduct.edges.map(
     edge => edge.node.mainCategory
   )
   //remove duplicates from list
-  const mainCategoriesUnique = removeDuplicates(mainCategoriesAll)
-
+  const mainCategoriesUniqueEnglish = removeDuplicates(mainCategoriesAllEnglish)
   //get image to represent each category
   const categoryImages = getCategoryImages(
-    mainCategoriesUnique,
+    mainCategoriesUniqueEnglish,
     data.allContentfulProduct.edges
+  )
+
+  const mainCategoriesAllLocalised = data.allContentfulProduct.edges.map(
+    edge => {
+      if (language === "en" || !edge.node.mainCategorySpanish) {
+        return edge.node.mainCategory
+      } else {
+        return edge.node.mainCategorySpanish
+      }
+    }
+  )
+
+  const mainCategoriesLocalisedUnique = removeDuplicates(
+    mainCategoriesAllLocalised
   )
 
   return (
@@ -67,10 +81,11 @@ const Products = props => {
         <div className="products__content">
           <Container maxWidth="md">
             <Grid container spacing={4}>
-              {mainCategoriesUnique.map((mainCategory, index) => (
+              {/* mapping over english list instead of localised beacuse image array is created based on english list - if there is a discrepency between number of items in english list and spanish list (e.g. if spanish product category has a typo) it will crash as it won't find an item with the last index - this way the last item just won't be shown */}
+              {mainCategoriesUniqueEnglish.map((mainCategoryEnglish, index) => (
                 <Thumb
-                  title={mainCategory}
-                  link={`/products/${mainCategory}`}
+                  title={mainCategoriesLocalisedUnique[index]}
+                  link={`/products/${mainCategoryEnglish}`}
                   key={index}
                   image={categoryImages[index].src}
                   imageTitle={categoryImages[index].alt}

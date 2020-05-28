@@ -17,7 +17,9 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             mainCategory
+            mainCategorySpanish
             subCategory
+            subCategorySpanish
             contentful_id
           }
         }
@@ -32,7 +34,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     createPage({
       component: productTemplate,
-      path: "./src/templates/productTemplate",
+      path: `/products/${edge.node.mainCategory}/${edge.node.subCategory}/${edge.node.contentful_id}`,
       context: {
         id: edge.node.contentful_id,
       },
@@ -41,19 +43,22 @@ exports.createPages = async ({ graphql, actions }) => {
 
     createPage({
       component: mainCategoriesTemplate,
-      path: "./src/templates/mainCategoriesTemplate",
+      path: `/products/${edge.node.mainCategory}`,
       context: {
         mainCategory: edge.node.mainCategory,
+        mainCategorySpanish: edge.node.mainCategorySpanish,
       },
     })
 
     //create page for each unique sub-category
     createPage({
       component: subCategoriesTemplate,
-      path: "./src/templates/subCategoriesTemplate",
+      path: `/products/${edge.node.mainCategory}/${edge.node.subCategory}`,
       context: {
         subCategory: edge.node.subCategory,
+        subCategorySpanish: edge.node.subCategorySpanish,
         mainCategory: edge.node.mainCategory,
+        mainCategorySpanish: edge.node.mainCategorySpanish,
       },
     })
   })

@@ -22,6 +22,7 @@ const Services = props => {
           component="h6"
           align="center"
           style={{ marginTop: "3rem" }}
+          id="customDesign"
         >
           {multiLingualText.custom_design[language]}
         </Typography>

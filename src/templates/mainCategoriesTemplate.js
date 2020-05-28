@@ -53,6 +53,14 @@ const MainCategoriesTemplate = props => {
     subCategoriesUnique,
     props.data.allContentfulProduct.edges
   )
+
+  let mainCategory
+  if (language === "en" || !props.pageContext.mainCategorySpanish) {
+    mainCategory = props.pageContext.mainCategory
+  } else {
+    mainCategory = props.pageContext.mainCategorySpanish
+  }
+
   return (
     <Layout>
       <Container className="mainCategories__wrapper">
@@ -60,9 +68,8 @@ const MainCategoriesTemplate = props => {
           <Link color="inherit" href="/">
             {multiLingualText.products[language]}
           </Link>
-
           <Typography color="textPrimary">
-            {capitaliseFirst(props.pageContext.mainCategory)}
+            {capitaliseFirst(mainCategory)}
           </Typography>
         </Breadcrumbs>
         <div className="mainCategories__content">

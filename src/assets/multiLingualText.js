@@ -105,6 +105,18 @@ const multiLingualText = {
     en: "Add",
     es: "Añadir",
   },
+  custom_design: {
+    en: "Custom Design",
+    es: "Diseño Personalizado",
+  },
+  contact_us: {
+    en: "Contact Us",
+    es: "Contacta con Nosotros",
+  },
+  pieces: {
+    en: "pieces",
+    es: "unidades",
+  },
 }
 
 export default multiLingualText

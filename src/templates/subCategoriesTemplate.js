@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import Grid from "@material-ui/core/Grid"
@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography"
 import capitaliseFirst from "../utils/capitaliseFirst"
 import "../styles/subCategories.scss"
 import Link from "@material-ui/core/Link"
+import LanguageContext from "../context/LanguageContext"
 
 export const query = graphql`
   query($subCategory: String!) {
@@ -36,6 +37,21 @@ const useStyles = makeStyles(theme => ({}))
 
 const SubCategoriesTemplate = props => {
   const classes = useStyles()
+  const { language } = useContext(LanguageContext)
+
+  let mainCategory
+  if (language === "en" || !props.pageContext.mainCategorySpanish) {
+    mainCategory = props.pageContext.mainCategory
+  } else {
+    mainCategory = props.pageContext.mainCategorySpanish
+  }
+
+  let subCategory
+  if (language === "en" || !props.pageContext.subCategorySpanish) {
+    subCategory = props.pageContext.subCategory
+  } else {
+    subCategory = props.pageContext.subCategorySpanish
+  }
 
   return (
     <Layout>
@@ -55,11 +71,11 @@ const SubCategoriesTemplate = props => {
             color="inherit"
             href={`/products/${props.pageContext.mainCategory}`}
           >
-            {capitaliseFirst(props.pageContext.mainCategory)}
+            {capitaliseFirst(mainCategory)}
           </Link>
 
           <Typography color="textPrimary">
-            {capitaliseFirst(props.pageContext.subCategory)}
+            {capitaliseFirst(subCategory)}
           </Typography>
         </Breadcrumbs>
         <div className="subCategories__content">
