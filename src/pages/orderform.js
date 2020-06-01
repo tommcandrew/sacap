@@ -10,17 +10,6 @@ import Typography from "@material-ui/core/Typography"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
 
-const handleItemsInputChange = e => {
-  //I think this is an event handler is necessary as 'value' is set on the input element
-}
-
-//copy and pasted - I guess this is necessary for Netlify to receive the form data
-const encode = data => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&")
-}
-
 const useStyles = makeStyles(theme => ({
   form: {
     width: "80%",
