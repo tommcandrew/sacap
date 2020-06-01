@@ -12,6 +12,7 @@ import "../styles/products.scss"
 import "../styles/global.scss"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
+import Head from "../components/head.js"
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -70,6 +71,7 @@ const Products = props => {
 
   return (
     <Layout>
+      <Head title="Home" />
       <Container className="products__wrapper">
         <Typography
           gutterBottom

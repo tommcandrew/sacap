@@ -2,9 +2,8 @@ const dotenv = require("dotenv").config()
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby`,
-    siteUrl: `https://www.gatsbyjs.org`,
-    description: `Blazing fast modern site generator for React`,
+    title: `SACAP`,
+    description: `Plastic packaging supplier`,
   },
   plugins: [
     "gatsby-plugin-sass",

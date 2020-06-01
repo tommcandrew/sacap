@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container"
 import Typography from "@material-ui/core/Typography"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
+import Head from "../components/head.js"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -56,6 +57,8 @@ const OrderForm = props => {
 
   return (
     <Layout hideQuoteButton={"hide"} page="orderform">
+      <Head title="Order Form" />
+
       <Container>
         <Typography
           variant="h5"

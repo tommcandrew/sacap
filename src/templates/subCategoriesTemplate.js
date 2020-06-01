@@ -11,6 +11,7 @@ import capitaliseFirst from "../utils/capitaliseFirst"
 import "../styles/subCategories.scss"
 import Link from "@material-ui/core/Link"
 import LanguageContext from "../context/LanguageContext"
+import Head from "../components/head"
 
 export const query = graphql`
   query($subCategory: String!) {
@@ -55,6 +56,7 @@ const SubCategoriesTemplate = props => {
 
   return (
     <Layout>
+      <Head title={capitaliseFirst(subCategory)} />
       <Container className="subCategories__wrapper">
         <Breadcrumbs aria-label="breadcrumb">
           {props.pageContext.locale === "es" ? (
@@ -73,7 +75,6 @@ const SubCategoriesTemplate = props => {
           >
             {capitaliseFirst(mainCategory)}
           </Link>
-
           <Typography color="textPrimary">
             {capitaliseFirst(subCategory)}
           </Typography>

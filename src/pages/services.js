@@ -5,12 +5,15 @@ import Typography from "@material-ui/core/Typography"
 import "../styles/services.scss"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
+import Head from "../components/head.js"
 
 const Services = props => {
   const { language } = useContext(LanguageContext)
 
   return (
     <Layout>
+      <Head title="Services" />
+
       <Container className="services__wrapper">
         <Typography gutterBottom variant="h4" component="h4" align="center">
           {multiLingualText.our_services[language]}

@@ -5,12 +5,15 @@ import Typography from "@material-ui/core/Typography"
 import "../styles/contact.scss"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
+import Head from "../components/head.js"
 
 const Contact = () => {
   const { language } = useContext(LanguageContext)
 
   return (
     <Layout>
+      <Head title="Contact" />
+
       <Container className="services__wrapper">
         <Typography gutterBottom variant="h4" component="h4" align="center">
           {multiLingualText.contact_us[language]}

@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
+import Head from "../components/head"
 
 export const query = graphql`
   query($id: String!) {
@@ -101,6 +102,7 @@ const ProductTemplate = props => {
   }
   return (
     <Layout>
+      <Head title={capitaliseFirst(props.data.contentfulProduct.name)} />
       <Container className="product__wrapper">
         <Breadcrumbs aria-label="breadcrumb" className={classes.breadcrumbs}>
           <Link color="inherit" href="/">

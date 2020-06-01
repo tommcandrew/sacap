@@ -14,6 +14,7 @@ import capitaliseFirst from "../utils/capitaliseFirst"
 import "../styles/mainCategories.scss"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
+import Head from "../components/head"
 
 export const query = graphql`
   query($mainCategory: String!) {
@@ -79,6 +80,8 @@ const MainCategoriesTemplate = props => {
 
   return (
     <Layout>
+      <Head title={capitaliseFirst(mainCategory)} />
+
       <Container className="mainCategories__wrapper">
         <Breadcrumbs aria-label="breadcrumb">
           <Link color="inherit" href="/">
