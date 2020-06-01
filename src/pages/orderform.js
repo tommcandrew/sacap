@@ -132,7 +132,6 @@ const OrderForm = props => {
             style={{ display: "none" }}
             type="text"
             value={cartItemsString}
-            onChange={handleItemsInputChange}
           ></textarea>
 
           <div className={classes.buttonWrapper}>
