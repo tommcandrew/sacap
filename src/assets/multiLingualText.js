@@ -117,6 +117,34 @@ const multiLingualText = {
     en: "pieces",
     es: "unidades",
   },
+  specifications: {
+    en: "Specifications",
+    es: "Especificaciones",
+  },
+  colour: {
+    en: "Colour",
+    es: "Color",
+  },
+  material: {
+    en: "Material",
+    es: "Material",
+  },
+  dosage: {
+    en: "Dosage",
+    es: "Dosis",
+  },
+  weight: {
+    en: "Weight",
+    es: "Peso",
+  },
+  capacity: {
+    en: "Capacity",
+    es: "Capacidad",
+  },
+  enter_a_quantity: {
+    en: "Enter a quantity",
+    es: "Ingrese una cantidad",
+  },
 }
 
 export default multiLingualText

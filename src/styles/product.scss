@@ -4,10 +4,16 @@
 
 .product__content {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   border: 1px solid #ccc;
   height: 100%;
   padding: 3rem 0;
+}
+
+.product__content--top {
+  display: flex;
+  justify-content: space-around;
 }
 
 .product__form {
@@ -19,6 +25,24 @@
 .product__right {
   flex-basis: 45%;
   padding: 1rem;
+}
+
+.product__specs {
+  width: 70%;
+  margin: 2rem auto 0 auto;
+  font-size: 1rem;
+}
+
+.product__spec {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+  padding: 1rem 0;
+  font-weight: bold;
+}
+
+.product__spec--data {
+  color: orange;
 }
 
 @media only screen and (max-width: 650px) {
@@ -34,7 +58,7 @@
 }
 
 @media only screen and (max-width: 950px) {
-  .product__content {
+  .product__content--top {
     flex-direction: column;
   }
 }

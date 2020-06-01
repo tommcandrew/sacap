@@ -22,6 +22,11 @@ export const query = graphql`
       contentful_id
       mainCategory
       subCategory
+      colour
+      dosage
+      material
+      capacity
+      # weight
       description {
         json
       }
@@ -50,20 +55,31 @@ const useStyles = makeStyles(theme => ({
   input: {
     width: "50%",
   },
+  specsTitle: {
+    textAlign: "center",
+  },
 }))
 
 const ProductTemplate = props => {
-  const { handleAddToCart } = useContext(CartContext)
+  const { handleAddToCart, setInfoMessages } = useContext(CartContext)
   const classes = useStyles()
   const { language } = useContext(LanguageContext)
 
   const handleAddRequest = e => {
     e.preventDefault()
-    const name = props.data.contentfulProduct.name
-    const id = props.data.contentfulProduct.contentful_id
-    const quantity = e.target.quantity.value
-    handleAddToCart(name, id, quantity)
-    e.target.reset()
+    if (!e.target.quantity.value) {
+      console.log("no quantity")
+      setInfoMessages([
+        { type: "warning", text: multiLingualText.enter_a_quantity[language] },
+      ])
+      return
+    } else {
+      const name = props.data.contentfulProduct.name
+      const id = props.data.contentfulProduct.contentful_id
+      const quantity = e.target.quantity.value
+      handleAddToCart(name, id, quantity)
+      e.target.reset()
+    }
   }
   let mainCategory
   if (language === "en" || !props.data.contentfulProduct.mainCategorySpanish) {
@@ -107,41 +123,111 @@ const ProductTemplate = props => {
           </Typography>
         </Breadcrumbs>
         <div className="product__content">
-          <div className={classes.left}>
-            <img
-              src={props.data.contentfulProduct.image.fluid.src}
-              alt={props.data.contentfulProduct.image.title}
-              className={classes.image}
-            />
-          </div>
-          <div className="product__right">
-            <Typography
-              gutterBottom
-              variant="h4"
-              component="h4"
-              className="product__name"
-            >
-              {capitaliseFirst(props.data.contentfulProduct.name)}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="subtitle1"
-              component="p"
-              className="product__id"
-            >
-              ID: {capitaliseFirst(props.data.contentfulProduct.contentful_id)}
-            </Typography>
-            {documentToReactComponents(description)}
-            <form className="product__form" onSubmit={e => handleAddRequest(e)}>
-              <TextField
-                label={multiLingualText.qty[language]}
-                name="quantity"
-                className={classes.input}
+          <div className="product__content--top">
+            <div className={classes.left}>
+              <img
+                src={props.data.contentfulProduct.image.fluid.src}
+                alt={props.data.contentfulProduct.image.title}
+                className={classes.image}
               />
-              <Button variant="contained" color="secondary" type="submit">
-                {multiLingualText.add[language]}
-              </Button>
-            </form>
+            </div>
+
+            <div className="product__right">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h5"
+                className="product__name"
+              >
+                {capitaliseFirst(props.data.contentfulProduct.name)}
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="subtitle1"
+                component="p"
+                className="product__id"
+              >
+                ID:{" "}
+                {capitaliseFirst(props.data.contentfulProduct.contentful_id)}
+              </Typography>
+              {documentToReactComponents(description)}
+              <form
+                className="product__form"
+                onSubmit={e => handleAddRequest(e)}
+              >
+                <TextField
+                  label={multiLingualText.qty[language]}
+                  name="quantity"
+                  className={classes.input}
+                />
+                <Button variant="contained" color="secondary" type="submit">
+                  {multiLingualText.add[language]}
+                </Button>
+              </form>
+            </div>
+          </div>
+
+          <div className="product__content__bottom">
+            <div className="product__specs">
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h5"
+                className={classes.specsTitle}
+              >
+                {multiLingualText.specifications[language]}
+              </Typography>
+              {props.data.contentfulProduct.weight && (
+                <div className="product__spec">
+                  <div className="product__spec--label">
+                    {multiLingualText.weight[language]}
+                  </div>
+                  <div className="product__spec--data">
+                    {props.data.contentfulProduct.weight}
+                  </div>
+                </div>
+              )}
+              {props.data.contentfulProduct.colour && (
+                <div className="product__spec">
+                  <div className="product__spec--label">
+                    {multiLingualText.colour[language]}
+                  </div>
+                  <div className="product__spec--data">
+                    {props.data.contentfulProduct.colour}
+                  </div>
+                </div>
+              )}
+              {props.data.contentfulProduct.material && (
+                <div className="product__spec">
+                  <div className="product__spec--label">
+                    {multiLingualText.material[language]}
+                  </div>
+                  <div className="product__spec--data">
+                    {props.data.contentfulProduct.material}
+                  </div>
+                </div>
+              )}
+              {props.data.contentfulProduct.dosage && (
+                <div className="product__spec">
+                  <div className="product__spec--label">
+                    {multiLingualText.dosage[language]}
+                  </div>
+                  <div className="product__spec--data">
+                    {props.data.contentfulProduct.dosage}
+                  </div>
+                </div>
+              )}
+              {props.data.contentfulProduct.capacity && (
+                <div className="product__spec">
+                  <div className="product__spec--label">
+                    {multiLingualText.capacity[language]}
+                  </div>
+                  <div className="product__spec--data">
+                    {props.data.contentfulProduct.capacity}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </Container>

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react"
+import React, { useContext, useState } from "react"
 import CartContext from "../context/CartContext"
 import Alert from "./alert.js"
 import List from "@material-ui/core/List"
@@ -38,17 +38,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Cart = ({ hideQuoteButton, page }) => {
-  const {
-    cartItems,
-    handleRemoveFromCart,
-    setInfoMessages,
-    infoMessages,
-  } = useContext(CartContext)
+  const { cartItems, handleRemoveFromCart, infoMessages } = useContext(
+    CartContext
+  )
   const classes = useStyles()
-  const [dense, setDense] = React.useState(false)
-  const [secondary, setSecondary] = React.useState(false)
   const [open, setOpen] = useState(false)
-  const [showNormalCart, setShowNormalCart] = useState(true)
 
   const { language, changeLanguage } = useContext(LanguageContext)
 
@@ -59,7 +53,7 @@ const Cart = ({ hideQuoteButton, page }) => {
   return (
     <>
       <Paper className={`cart__wrapper cart__wrapper--normal`}>
-        <List dense={dense}>
+        <List>
           {page === "orderform" && (
             <Typography
               variant="h5"
@@ -90,7 +84,6 @@ const Cart = ({ hideQuoteButton, page }) => {
           ))}
           {cartItems.length === 0 && (
             <Typography>
-              {" "}
               {multiLingualText.your_cart_is_empty[language]}
             </Typography>
           )}
@@ -130,12 +123,12 @@ const Cart = ({ hideQuoteButton, page }) => {
           PaperProps={{ style: { width: "80vw" } }}
         >
           <div className="cart__content--mobile">
-            <List dense={dense}>
+            <List>
               {cartItems.map((item, index) => (
                 <ListItem className={classes.item} key={index}>
                   <ListItemText
                     primary={item.name}
-                    secondary={`${item.quantity} pieces`}
+                    secondary={`${item.quantity} ${multiLingualText.pieces[language]}`}
                   />
                   <ListItemSecondaryAction>
                     <IconButton
@@ -152,7 +145,6 @@ const Cart = ({ hideQuoteButton, page }) => {
               <Container>
                 {cartItems.length === 0 && (
                   <Typography align="center">
-                    {" "}
                     {multiLingualText.your_cart_is_empty[language]}
                   </Typography>
                 )}

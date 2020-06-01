@@ -1,41 +1,40 @@
 import React from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faCheckCircle,
-  faTimesCircle,
-  faExclamationCircle,
-  faLightbulb,
-} from "@fortawesome/free-solid-svg-icons"
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+import { makeStyles } from "@material-ui/core/styles"
 
-import "../styles/alert.scss"
-
-const getIcon = message => {
-  let icon
-  if (message.type === "success") {
-    icon = faCheckCircle
-  } else if (message.type === "failure") {
-    icon = faTimesCircle
-  } else if (message.type === "info") {
-    icon = faLightbulb
-  } else {
-    icon = faExclamationCircle
-  }
-  return icon
-}
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
+  alert: {
+    fontSize: "1rem",
+  },
+}))
 
 const Alert = ({ messages }) => {
+  const classes = useStyles()
+
   return (
-    <div className="alert__wrapper">
+    <div className={classes.root}>
       {messages.map((message, index) => (
-        <div
-          className={`alert__content alert--${message.type}`}
-          key={"alert" + index}
+        <Snackbar
+          key={index}
+          open={true}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          <span className="alert__icon">
-            <FontAwesomeIcon icon={getIcon(message)} />
-          </span>
-          <span className="alert__text">{message.text}</span>
-        </div>
+          <MuiAlert
+            severity={message.type}
+            elevation={6}
+            variant="filled"
+            className={classes.alert}
+          >
+            {message.text}
+          </MuiAlert>
+        </Snackbar>
       ))}
     </div>
   )
