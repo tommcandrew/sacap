@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
 import Layout from "../components/layout"
-import "../styles/orderForm.scss"
 import CartContext from "../context/CartContext"
 import TextField from "@material-ui/core/TextField"
 import { makeStyles } from "@material-ui/core/styles"
