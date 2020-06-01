@@ -18,7 +18,6 @@ import ClearIcon from "@material-ui/icons/Clear"
 import Container from "@material-ui/core/Container"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
-import { Redirect } from "@reach/router"
 
 const useStyles = makeStyles(theme => ({
   demo: {
@@ -57,7 +56,12 @@ const Cart = ({ hideQuoteButton, page }) => {
   const handleGetQuote = e => {
     e.preventDefault()
     if (cartItems.length === 0) {
-      setInfoMessages([{ type: "warning", text: "Your cart is empty" }])
+      setInfoMessages([
+        {
+          type: "warning",
+          text: multiLingualText.your_cart_is_empty[language],
+        },
+      ])
       return
     } else {
       if (typeof window !== `undefined`) window.location.replace(`/orderform`)
