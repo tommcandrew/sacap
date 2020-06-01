@@ -5,7 +5,6 @@ import CartContext from "../context/CartContext"
 import TextField from "@material-ui/core/TextField"
 import { makeStyles } from "@material-ui/core/styles"
 import { Button } from "@material-ui/core"
-import "../styles/orderForm.scss"
 import Container from "@material-ui/core/Container"
 import Typography from "@material-ui/core/Typography"
 import LanguageContext from "../context/LanguageContext"
@@ -25,10 +24,20 @@ const encode = data => {
 const useStyles = makeStyles(theme => ({
   form: {
     width: "80%",
-    margin: "4rem auto 0 auto",
+    margin: "2rem auto 0 auto",
   },
   title: {
     marginTop: "2rem",
+  },
+  submit: {
+    marginTop: "2rem",
+    fontSize: "1rem",
+  },
+  buttonWrapper: {
+    textAlign: "center",
+  },
+  field: {
+    margin: "0.7rem 0",
   },
 }))
 
@@ -71,14 +80,14 @@ const OrderForm = props => {
         </Typography>
 
         <form
-          className="orderForm__form"
           action="/success"
           data-netlify="true"
           name="order-form"
+          className={classes.form}
         >
           <input type="hidden" name="form-name" value="order-form" />
 
-          <div className="orderForm__field">
+          <div className={classes.field}>
             <TextField
               label={multiLingualText.name[language]}
               id="name"
@@ -87,7 +96,7 @@ const OrderForm = props => {
               fullWidth
             />
           </div>
-          <div className="orderForm__field">
+          <div className={classes.field}>
             <TextField
               label={multiLingualText.company[language]}
               id="company"
@@ -97,7 +106,7 @@ const OrderForm = props => {
             />
           </div>
 
-          <div className="orderForm__field">
+          <div className={classes.field}>
             <TextField
               label={multiLingualText.email[language]}
               id="email"
@@ -108,7 +117,7 @@ const OrderForm = props => {
             />
           </div>
 
-          <div className="orderForm__field">
+          <div className={classes.field}>
             <TextField
               label={multiLingualText.phone[language]}
               id="phone"
@@ -118,7 +127,7 @@ const OrderForm = props => {
             />
           </div>
 
-          <div className="orderForm__field">
+          <div className={classes.field}>
             <TextField
               label={multiLingualText.note[language]}
               id="note"
@@ -138,9 +147,9 @@ const OrderForm = props => {
             onChange={handleItemsInputChange}
           ></textarea>
 
-          <div className="orderForm__button-wrapper">
+          <div className={classes.buttonWrapper}>
             <Button
-              className="orderForm__submit"
+              className={classes.submit}
               type="submit"
               variant="contained"
               color="secondary"
