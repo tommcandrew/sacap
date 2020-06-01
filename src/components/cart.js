@@ -18,6 +18,7 @@ import ClearIcon from "@material-ui/icons/Clear"
 import Container from "@material-ui/core/Container"
 import LanguageContext from "../context/LanguageContext"
 import multiLingualText from "../assets/multiLingualText"
+import { Redirect } from "@reach/router"
 
 const useStyles = makeStyles(theme => ({
   demo: {
@@ -38,9 +39,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Cart = ({ hideQuoteButton, page }) => {
-  const { cartItems, handleRemoveFromCart, infoMessages } = useContext(
-    CartContext
-  )
+  const {
+    cartItems,
+    handleRemoveFromCart,
+    infoMessages,
+    setInfoMessages,
+  } = useContext(CartContext)
   const classes = useStyles()
   const [open, setOpen] = useState(false)
 
@@ -48,6 +52,16 @@ const Cart = ({ hideQuoteButton, page }) => {
 
   const toggleDrawer = () => {
     setOpen(!open)
+  }
+
+  const handleGetQuote = e => {
+    e.preventDefault()
+    if (cartItems.length === 0) {
+      setInfoMessages([{ type: "warning", text: "Your cart is empty" }])
+      return
+    } else {
+      if (typeof window !== `undefined`) window.location.replace(`/orderform`)
+    }
   }
 
   return (
@@ -92,7 +106,7 @@ const Cart = ({ hideQuoteButton, page }) => {
           <Button
             variant="contained"
             color="primary"
-            href="/orderform"
+            onClick={handleGetQuote}
             fullWidth
           >
             {multiLingualText.get_quote[language]}
@@ -154,7 +168,7 @@ const Cart = ({ hideQuoteButton, page }) => {
               <Button
                 variant="contained"
                 color="primary"
-                href="/orderform"
+                onClick={handleGetQuote}
                 fullWidth
                 size="large"
               >

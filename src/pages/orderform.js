@@ -135,6 +135,7 @@ const OrderForm = props => {
             style={{ display: "none" }}
             type="text"
             value={cartItemsString}
+            readOnly
           ></textarea>
 
           <div className={classes.buttonWrapper}>
