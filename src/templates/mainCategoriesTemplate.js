@@ -22,7 +22,9 @@ export const query = graphql`
         node {
           name
           mainCategory
+          mainCategorySpanish
           subCategory
+          subCategorySpanish
           image {
             title
             fluid {
@@ -42,16 +44,30 @@ const MainCategoriesTemplate = props => {
   const { language } = useContext(LanguageContext)
 
   //get unique list of sub categories
-  const subCategoriesAll = props.data.allContentfulProduct.edges.map(
+  const subCategoriesAllEnglish = props.data.allContentfulProduct.edges.map(
     edge => edge.node.subCategory
   )
   //remove duplicates from list
-  const subCategoriesUnique = removeDuplicates(subCategoriesAll)
+  const subCategoriesUniqueEnglish = removeDuplicates(subCategoriesAllEnglish)
 
   //get image to represent each sub category
   const subCategoryImages = getCategoryImages(
-    subCategoriesUnique,
+    subCategoriesUniqueEnglish,
     props.data.allContentfulProduct.edges
+  )
+
+  const subCategoriesAllLocalised = props.data.allContentfulProduct.edges.map(
+    edge => {
+      if (language === "en" || !edge.node.subCategorySpanish) {
+        return edge.node.subCategory
+      } else {
+        return edge.node.subCategorySpanish
+      }
+    }
+  )
+
+  const subCategoriesLocalisedUnique = removeDuplicates(
+    subCategoriesAllLocalised
   )
 
   let mainCategory
@@ -75,9 +91,9 @@ const MainCategoriesTemplate = props => {
         <div className="mainCategories__content">
           <Container maxWidth="md">
             <Grid container spacing={4}>
-              {subCategoriesUnique.map((subCategory, index) => (
+              {subCategoriesUniqueEnglish.map((subCategory, index) => (
                 <Thumb
-                  title={subCategory}
+                  title={subCategoriesLocalisedUnique[index]}
                   link={`/products/${props.pageContext.mainCategory}/${subCategory}`}
                   key={index}
                   image={subCategoryImages[index].src}

@@ -42,6 +42,7 @@ const Products = props => {
       }
     }
   `)
+
   const mainCategoriesAllEnglish = data.allContentfulProduct.edges.map(
     edge => edge.node.mainCategory
   )
